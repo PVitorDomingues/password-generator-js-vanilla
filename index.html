@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset = "UTF-8">
+    <meta name="viewport" content ="width=device-width, initial-scale=1.0">
+    <title>Gerador de Senhas Seguras</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gerador de Senhas Seguras</h1>
+
+    <div class="password-display">
+        <input type="text" id="passwordOutput" readonly value="P@ssw0rd123!" aria-label="Senha gerada">
+        <button id="copyButton">Copiar</button>
+    </div>
+
+    <div class="strength-indicator">
+        <p>Força de Senha:</p>
+        <div class="strength-bar-container">
+            <div id="strengthBar" class="strength-bar weak"></div>
+            <span id="strengthText" class="weak">Fraca</span>
+        </div>
+    </div>
+
+    <div class="controls">
+            <label for="passwordLength">Comprimento: <span id="lengthValue">12</span></label>
+            <input type="range" id="passwordLength" min="8" max="24" value="12">
+    </div>
+
+    <div class="options">
+            <label><input type="checkbox" id="includeUppercase" checked> Incluir Maiúsculas</label>
+            <label><input type="checkbox" id="includeLowercase" checked> Incluir Minúsculas</label>
+            <label><input type="checkbox" id="includeNumbers" checked> Incluir Números</label>
+            <label><input type="checkbox" id="includeSymbols"> Incluir Símbolos</label>
+        </div>
+
+        <button id="generateButton">GERAR NOVA SENHA</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
