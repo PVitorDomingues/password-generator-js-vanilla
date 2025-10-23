@@ -17,6 +17,9 @@ const LOWERCASE_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz';
 const NUMBER_CHARACTERS = '0123456789';
 const SYMBOL_CHARACTERS = '!@#$%^&*()_+[]{}|;:,.<>?\\\'\"';
 
+// Valor inicial do comprimento
+lengthValue.textContent = passwordLength.value;
+
 /**
  * Gera uma nova senha com base nos parâmetros fornecidos.
  * @param {number} length - Comprimento da senha.
@@ -29,7 +32,7 @@ const SYMBOL_CHARACTERS = '!@#$%^&*()_+[]{}|;:,.<>?\\\'\"';
 
 function generatePassword(length, useUpper, useLower, useNumbers, useSymbols) {
     let allowedCharacters = ''; 
-    let password = '';          // A senha sendo construída
+    let password = ''; // A senha sendo construída
 
     if (useUpper) allowedCharacters += UPPERCASE_CHARACTERS;
     if (useLower) allowedCharacters += LOWERCASE_CHARACTERS;
@@ -50,11 +53,60 @@ function generatePassword(length, useUpper, useLower, useNumbers, useSymbols) {
     return password;
 }
 
+function updatePasswordStrength(password) {
+    let score = 0;
+    const length = password.length;
+
+    //Remove todas as classes de força anteriores (resetar a cor da barra)
+    strengthBar.className = 'strength-bar';
+    strengthText.className = '';
+
+    // Bônus por Comprimento
+    if (length >= 8) score += 1;
+    if (length >= 12) score += 1;
+    if (length >= 16) score += 1; 
+
+    // Bônus por Tipos de Caracteres (Usando RegExp)
+    if (/[A-Z]/.test(password)) score += 1; // Inclui Maiúsculas?
+    if (/[a-z]/.test(password)) score += 1; // Inclui Minúsculas?
+    if (/[0-9]/.test(password)) score += 1; // Inclui Números?
+    if (/[^A-Za-z0-9]/.test(password)) score += 1; // Inclui Símbolos?
+
+    // ATRIBUIÇÃO VISUAL COM BASE NO SCORE
+    if (score < 3) {
+        strengthBar.classList.add('weak');
+        strengthText.classList.add('weak');
+        strengthText.textContent = "FRACA";
+    } else if (score < 6) {
+        strengthBar.classList.add('medium');
+        strengthText.classList.add('medium');
+        strengthText.textContent = "MÉDIA";
+    } else {
+        strengthBar.classList.add('strong');
+        strengthText.classList.add('strong');
+        strengthText.textContent = "FORTE";
+    }
+}
+
 // Atualiza o valor do comprimento da senha quando o slider é movido
 passwordLength.addEventListener('input', () => {
     lengthValue.textContent = passwordLength.value;
-    // Futuramente, chamaremos a função de gerar senha aqui também para atualização dinâmica
+
+    const length = parseInt(passwordLength.value);
+    const useUpper = includeUppercase.checked;
+    const useLower = includeLowercase.checked;
+    const useNumbers = includeNumbers.checked;
+    const useSymbols = includeSymbols.checked;
+
+    // Gera uma nova senha ao mover o slider
+    const newPassword = generatePassword(length, useUpper, useLower, useNumbers, useSymbols);
+
+    passwordOutput.value = newPassword;
+
+    // Atualiza a força da nova senha
+    updatePasswordStrength(newPassword);
 });
+
 
 // Evento de clique para o botão "GERAR NOVA SENHA"
 generateButton.addEventListener('click', () => {
@@ -70,15 +122,26 @@ generateButton.addEventListener('click', () => {
 
     // Atualiza a tela
     passwordOutput.value = newPassword;
+
+    // Função de força da senha
+    updatePasswordStrength(newPassword);
 });
 
 // Evento de clique para o botão "Copiar"
 copyButton.addEventListener('click', () => {
-    // Lógica de copiar senha
-    console.log('Botão Copiar Clicado!');
-    // Aqui entra a função para copiar para a área de transferência
+    navigator.clipboard.writeText(passwordOutput.value)
+        .then(() => {
+            // Feedback visual de que copiou!
+            copyButton.textContent = 'COPIADO!';
+            setTimeout(() => {
+                copyButton.textContent = 'Copiar'; // Volta ao normal após 1.5s
+            }, 1500);
+        })
+        .catch(err => {
+            console.error('Erro ao copiar: ', err);
+            // Fallback para navegadores antigos
+            alert('Não foi possível copiar automaticamente. Copie manualmente.');
+        });
 });
 
-// Valor inicial do comprimento
-lengthValue.textContent = passwordLength.value;
 
