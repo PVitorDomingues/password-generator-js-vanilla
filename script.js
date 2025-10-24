@@ -17,6 +17,18 @@ const LOWERCASE_CHARACTERS = 'abcdefghijklmnopqrstuvwxyz';
 const NUMBER_CHARACTERS = '0123456789';
 const SYMBOL_CHARACTERS = '!@#$%^&*()_+[]{}|;:,.<>?\\\'\"';
 
+// Função para coletar opções de senha
+function getPasswordOptions() {
+    return {
+        length: parseInt(passwordLength.value),
+        useUpper: includeUppercase.checked,
+        useLower: includeLowercase.checked,
+        useNumbers: includeNumbers.checked,
+        useSymbols: includeSymbols.checked
+    };
+}
+
+
 // Valor inicial do comprimento
 lengthValue.textContent = passwordLength.value;
 
@@ -67,10 +79,10 @@ function updatePasswordStrength(password) {
     if (length >= 16) score += 1; 
 
     // Bônus por Tipos de Caracteres (Usando RegExp)
-    if (/[A-Z]/.test(password)) score += 1; // Inclui Maiúsculas?
-    if (/[a-z]/.test(password)) score += 1; // Inclui Minúsculas?
-    if (/[0-9]/.test(password)) score += 1; // Inclui Números?
-    if (/[^A-Za-z0-9]/.test(password)) score += 1; // Inclui Símbolos?
+    if (/[A-Z]/.test(password)) score += 1; 
+    if (/[a-z]/.test(password)) score += 1; 
+    if (/[0-9]/.test(password)) score += 1; 
+    if (/[^A-Za-z0-9]/.test(password)) score += 1; 
 
     // ATRIBUIÇÃO VISUAL COM BASE NO SCORE
     if (score < 3) {
@@ -92,11 +104,7 @@ function updatePasswordStrength(password) {
 passwordLength.addEventListener('input', () => {
     lengthValue.textContent = passwordLength.value;
 
-    const length = parseInt(passwordLength.value);
-    const useUpper = includeUppercase.checked;
-    const useLower = includeLowercase.checked;
-    const useNumbers = includeNumbers.checked;
-    const useSymbols = includeSymbols.checked;
+    const { length, useUpper, useLower, useNumbers, useSymbols } = getPasswordOptions();
 
     // Gera uma nova senha ao mover o slider
     const newPassword = generatePassword(length, useUpper, useLower, useNumbers, useSymbols);
@@ -111,11 +119,7 @@ passwordLength.addEventListener('input', () => {
 // Evento de clique para o botão "GERAR NOVA SENHA"
 generateButton.addEventListener('click', () => {
     // Coleta dos Inputs
-    const length = parseInt(passwordLength.value);
-    const useUpper = includeUppercase.checked;
-    const useLower = includeLowercase.checked;
-    const useNumbers = includeNumbers.checked;
-    const useSymbols = includeSymbols.checked;
+    const { length, useUpper, useLower, useNumbers, useSymbols } = getPasswordOptions();
 
     // Chama a função que gera senha
     const newPassword = generatePassword(length, useUpper, useLower, useNumbers, useSymbols)
