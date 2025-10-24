@@ -34,17 +34,10 @@ lengthValue.textContent = passwordLength.value;
 
 /**
  * Gera uma nova senha com base nos parâmetros fornecidos.
- * @param {number} length - Comprimento da senha.
- * @param {boolean} useUpper - Incluir letras maiúsculas.
- * @param {boolean} useLower - Incluir letras minúsculas.
- * @param {boolean} useNumbers - Incluir números.
- * @param {boolean} useSymbols - Incluir símbolos.
- * @returns {string} A senha gerada.
  */
-
 function generatePassword(length, useUpper, useLower, useNumbers, useSymbols) {
     let allowedCharacters = ''; 
-    let password = ''; // A senha sendo construída
+    let password = '';
 
     if (useUpper) allowedCharacters += UPPERCASE_CHARACTERS;
     if (useLower) allowedCharacters += LOWERCASE_CHARACTERS;
@@ -57,8 +50,6 @@ function generatePassword(length, useUpper, useLower, useNumbers, useSymbols) {
     
     for (let i = 0; i < length; i++) {
         const randomIndex = Math.floor(Math.random() * allowedCharacters.length);
-
-        //Adiciona o caractere aleatório à senha
         password += allowedCharacters[randomIndex];
     }
 
@@ -69,7 +60,6 @@ function updatePasswordStrength(password) {
     let score = 0;
     const length = password.length;
 
-    //Remove todas as classes de força anteriores (resetar a cor da barra)
     strengthBar.className = 'strength-bar';
     strengthText.className = '';
 
@@ -98,54 +88,47 @@ function updatePasswordStrength(password) {
         strengthText.classList.add('strong');
         strengthText.textContent = "FORTE";
     }
+    // Se a senha estiver vazia
+    if (length === 0) {
+        strengthBar.className = 'strength-bar';
+        strengthText.textContent = '';
+    }
 }
 
-// Atualiza o valor do comprimento da senha quando o slider é movido
-passwordLength.addEventListener('input', () => {
-    lengthValue.textContent = passwordLength.value;
-
+function updateGeneratedPassword() {
     const { length, useUpper, useLower, useNumbers, useSymbols } = getPasswordOptions();
 
-    // Gera uma nova senha ao mover o slider
+    // Gera a senha
     const newPassword = generatePassword(length, useUpper, useLower, useNumbers, useSymbols);
 
+    // Atualiza o output e a força
     passwordOutput.value = newPassword;
-
-    // Atualiza a força da nova senha
     updatePasswordStrength(newPassword);
+}
+
+passwordLength.addEventListener('input', () => {
+    lengthValue.textContent = passwordLength.value;
+    updateGeneratedPassword(); 
 });
 
-
-// Evento de clique para o botão "GERAR NOVA SENHA"
+// Evento de clique para o botão "Gerar Senha"
 generateButton.addEventListener('click', () => {
-    // Coleta dos Inputs
-    const { length, useUpper, useLower, useNumbers, useSymbols } = getPasswordOptions();
-
-    // Chama a função que gera senha
-    const newPassword = generatePassword(length, useUpper, useLower, useNumbers, useSymbols)
-
-    // Atualiza a tela
-    passwordOutput.value = newPassword;
-
-    // Função de força da senha
-    updatePasswordStrength(newPassword);
+    updateGeneratedPassword();
 });
 
 // Evento de clique para o botão "Copiar"
 copyButton.addEventListener('click', () => {
     navigator.clipboard.writeText(passwordOutput.value)
         .then(() => {
-            // Feedback visual de que copiou!
+            // Feedback visual
+            const originalText = copyButton.textContent;
             copyButton.textContent = 'COPIADO!';
             setTimeout(() => {
-                copyButton.textContent = 'Copiar'; // Volta ao normal após 1.5s
+                copyButton.textContent = originalText;
             }, 1500);
         })
         .catch(err => {
             console.error('Erro ao copiar: ', err);
-            // Fallback para navegadores antigos
             alert('Não foi possível copiar automaticamente. Copie manualmente.');
         });
 });
-
-
