@@ -7,26 +7,27 @@
     <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <a href="../index.html" style="color: #4db8ff; text-decoration: none;">← Voltar</a>
-        <h1>Gerador de CNPJ</h1>
-        <p>Gere números de CNPJ válidos para testes de sistemas corporativos.</p>
+    <main class="main-content">
+        <div class="container">
+            <h1>Gerador de CNPJ</h1>
+            <p>Gere números de CNPJ válidos para testes de sistemas corporativos.</p>
 
-        <div class="password-display">
-            <h3 id="cnpjOutput">00.000.000/0001-00</h3>
-            <button id="copyButton">Copiar</button>
+            <div class="password-display">
+                <h3 id="cnpjOutput">00.000.000/0001-00</h3>
+                <button id="copyButton">Copiar</button>
+            </div>
+
+            <div class="options">
+                <label>
+                    <input type="checkbox" id="comPontuacao" checked> 
+                    Incluir Pontuação
+                </label>
+            </div>
+
+            <button id="btnGerarCNPJ">GERAR NOVO CNPJ</button>
         </div>
 
-        <div class="options">
-            <label>
-                <input type="checkbox" id="comPontuacao" checked> 
-                Incluir Pontuação
-            </label>
-        </div>
-
-        <button id="btnGerarCNPJ">GERAR NOVO CNPJ</button>
-    </div>
-
-    <script src="../js/cnpj.js"></script>
-</body>
-</html>
+        <script src="../js/sidebar.js"></script>
+        <script src="../js/cnpj.js"></script>
+    </body>
+    </html>
