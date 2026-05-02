@@ -1,5 +1,25 @@
+// Função para carregar o Google Analytics dinamicamente
+(function() {
+    const gaId = 'G-7N9WE0HZR0'; 
+
+    // Cria o elemento de script da tag global
+    const script = document.createElement('script');
+    script.async = true;
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+    document.head.appendChild(script);
+
+    // Inicializa o dataLayer e a função gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', gaId);
+    
+    console.log("Analytics carregado com sucesso.");
+})();
+
 (() => {
-  // ─── Configuração das ferramentas ───────────────────────────────────────────
+  // Configuração das ferramentas 
   const tools = [
     { icon: '🔐', label: 'Gerador de Senhas', href: 'gerador.html' },
     { icon: '⚖️', label: 'Calculadora de IMC', href: 'imc.html'    },
@@ -9,15 +29,15 @@
     { icon: '🔠', label: 'Conversor de Texto', href: 'texto.html'  },
   ];
 
-  // ─── Detecta o arquivo atual para marcar o link ativo ───────────────────────
+  // Detecta o arquivo atual para marcar o link ativo 
   const currentFile = window.location.pathname.split('/').pop();
 
-  // ─── Detecta se estamos na raiz (index) ou numa sub-pasta (tools/) ──────────
+  // Detecta se estamos na raiz (index) ou numa sub-pasta (tools/) 
   const isIndex   = currentFile === 'index.html' || currentFile === '';
   const basePath  = isIndex ? 'tools/' : '';
   const homeHref  = isIndex ? '#'      : '../index.html';
 
-  // ─── Gera os links da nav ────────────────────────────────────────────────────
+  // Gera os links da nav
   const navLinks = tools.map(({ icon, label, href }) => {
     const isActive = currentFile === href ? ' active' : '';
     return `
@@ -27,7 +47,7 @@
       </a>`;
   }).join('');
 
-  // ─── HTML completo da sidebar + toggle mobile ────────────────────────────────
+  //  HTML completo da sidebar + toggle mobile 
   const sidebarHTML = `
     <aside class="sidebar">
       <div class="sidebar-header">
