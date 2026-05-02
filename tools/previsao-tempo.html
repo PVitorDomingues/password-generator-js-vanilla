@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Previsão do Tempo – DevTools</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <main class="main-content">
+    <div class="container">
+        <h2>🌤️ Previsão do Tempo</h2>
+        <div style="margin-bottom: 15px;">
+            <input type="text" id="cidade" placeholder="Digite a cidade (ex: Jacareí)" style="width: 100%; padding: 8px;">
+        </div>
+        <button onclick="buscarTempo()" style="width: 100%; padding: 10px; background: #28a745; color: white; border: none; cursor: pointer;">
+            Ver Previsão
+        </button>
+
+        <div id="resultadoTempo" style="margin-top: 20px; text-align: center;">
+            <!-- Dados aqui -->
+        </div>
+    </div>
+
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/previsao-tempo.js"></script>
+    
