@@ -420,7 +420,7 @@ button:active { transform: scale(0.99); }
 #strengthText.medium { color: var(--warning); }
 #strengthText.strong { color: var(--success); }
 
-/* ─── Slider ──────────────────────────────────────────────────────────────── */
+/* Slider */
 
 #passwordLength {
   width: 100%;
@@ -443,7 +443,7 @@ button:active { transform: scale(0.99); }
 }
 #passwordLength::-webkit-slider-thumb:hover { transform: scale(1.15); }
 
-/* ─── Tabela de finanças ──────────────────────────────────────────────────── */
+/*Tabela de finanças*/
 
 #tabelaFinancas {
   width: 100%;

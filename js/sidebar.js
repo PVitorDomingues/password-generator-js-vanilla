@@ -27,6 +27,7 @@
     { icon: '🆔', label: 'Gerador de CPF',    href: 'cpf.html'    },
     { icon: '🏢', label: 'Gerador de CNPJ',   href: 'cnpj.html'   },
     { icon: '🔠', label: 'Conversor de Texto', href: 'texto.html'  },
+    { icon: '💱', label: 'Conversor de Moedas', href: 'conversor-moedas.html' }
   ];
 
   // Detecta o arquivo atual para marcar o link ativo 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de CPF – DevTools</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <main class="main-content">
+        <div class="container">
+        <h2>Conversor de Moedas</h2>
+        <p>Converta Real para Dólar, Bitcoin, Euro ou Ienes com cotação em tempo real.</p>
+    
+        <div class="input-group">
+            <label>Valor em BRL (R$):</label>
+            <input type="number" id="valorBRL" placeholder="Ex: 100.00">
+        </div>
+    
+        <div class="input-group">
+            <label>Converter para:</label>
+            <select id="moedaDestino">
+                <option value="USD">Dólar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+                <option value="BTC">Bitcoin (BTC)</option>
+                <option value="JPY">Iene (JPY)</option>
+            </select>
+        </div>
+
+        <button onclick="converter()">Convertendo...</button>
+
+        <div id="resultado" style="margin-top: 20px; font-weight: bold;">
+            <!-- O resultado aparecerá aqui -->
+        </div>
+    </div>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/conversor-moedas.js"></script>
