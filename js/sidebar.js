@@ -28,7 +28,8 @@
     { icon: '🏢', label: 'Gerador de CNPJ',   href: 'cnpj.html'   },
     { icon: '🔠', label: 'Conversor de Texto', href: 'texto.html'  },
     { icon: '💱', label: 'Conversor de Moedas', href: 'conversor-moedas.html' },
-    { icon: '🌤️', label: 'Previsão do Tempo', href: 'previsao-tempo.html' }
+    { icon: '🌤️', label: 'Previsão do Tempo', href: 'previsao-tempo.html' },
+    { icon: '👤', label: 'Gerador de Username', href: 'gerador-username.html' }
   ];
 
   // Detecta o arquivo atual para marcar o link ativo 

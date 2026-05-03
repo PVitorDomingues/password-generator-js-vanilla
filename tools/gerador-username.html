@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Username – DevTools</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <main class="main-content">
+        <div class="container">
+            <h2>👤 Gerador de Username</h2>
+            <div class="controls">
+                <label>Sua palavra-chave (opcional):</label>
+                <input type="text" id="palavraChave" placeholder="Ex: dev, tech, vitor">
+            </div>
+            <button onclick="gerarUsername()" id="btnGerar">Gerar Sugestões</button>
+
+            <div id="resultadoUser" class="password-display" style="margin-top: 20px; display: none; text-align: left;">
+                <ul id="listaUsers" style="list-style: none; padding: 0; margin: 0;"></ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="../js/sidebar.js"></script>
+    <script src="../js/gerador-username.js"></script>
+</body>
+</html>
